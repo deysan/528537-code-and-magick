@@ -19,7 +19,7 @@ var renderTitle = function (ctx) {
   ctx.font = '16px PT Mono';
   ctx.fillText('Ура вы победили!', CLOUD_X + GAP * 2, BAR_GAP - GAP);
   ctx.fillText('Спикок результатов:', CLOUD_X + GAP * 2, BAR_GAP + GAP);
-}
+};
 
 var getMaxElement = function (arr) {
   var maxElement = arr[0];
