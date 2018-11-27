@@ -41,10 +41,13 @@ window.renderStatistics = function (ctx, names, times) {
 
   var maxTime = getMaxElement(times);
 
-  var colorSaturation = getRandomInt(0, 100);
+
 
   for (var i = 0; i < names.length; i++) {
     ctx.fillText(names[i], CLOUD_X + BAR_WIDTH + (BAR_WIDTH + BAR_GAP) * i, CLOUD_Y + CLOUD_HEIGHT - GAP * 2);
+
+    var colorSaturation = getRandomInt(0, 100);
+
     if (names[i] === 'Вы') {
       ctx.fillStyle = 'rgba(255, 0, 0, 1)';
     } else {
