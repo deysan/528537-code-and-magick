@@ -55,9 +55,9 @@ var renderCharts = function (ctx, names, times) {
   }
 };
 
-window.renderStatistics = function (ctx) {
+window.renderStatistics = function (ctx, names, times) {
   renderCloud(ctx, CLOUD_X + GAP, CLOUD_Y + GAP, 'rgba(0, 0, 0, 0.7)');
   renderCloud(ctx, CLOUD_X, CLOUD_Y, '#FFFFFF');
   renderTitle(ctx);
-  renderCharts(ctx);
+  renderCharts(ctx, names, times);
 };
