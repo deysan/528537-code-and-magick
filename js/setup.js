@@ -5,8 +5,8 @@ document.querySelector('.setup-similar').classList.remove('hidden');
 
 var similarListElement = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
-    .content
-    .querySelector('.setup-similar-item');
+  .content
+  .querySelector('.setup-similar-item');
 
 var firstName = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
 var lastName = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
@@ -26,7 +26,7 @@ var wizardList = function () {
       coatColor: random(coatColor),
       eyesColor: random(eyesColor)
     };
-  };
+  }
 
   return wizards;
 };
@@ -49,3 +49,4 @@ var renderWizardsList = function (wizards) {
   similarListElement.appendChild(fragment);
 };
 
+renderWizardsList(wizardList());
