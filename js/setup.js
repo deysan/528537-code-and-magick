@@ -1,30 +1,33 @@
 'use strict';
 
-document.querySelector('.setup').classList.remove('hidden');
-document.querySelector('.setup-similar').classList.remove('hidden');
+var getRemoveHidden = function () {
+  document.querySelector('.setup').classList.remove('hidden');
+  document.querySelector('.setup-similar').classList.remove('hidden');
+};
 
 var similarListElement = document.querySelector('.setup-similar-list');
 var similarWizardTemplate = document.querySelector('#similar-wizard-template')
   .content
   .querySelector('.setup-similar-item');
 
-var firstName = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
-var lastName = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
-var coatColor = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
-var eyesColor = ['black', 'red', 'blue', 'yellow', 'green'];
+var FIRST_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
+var LAST_NAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
+var COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
+var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
+var NUMBER_WIZARDS = 4;
 
-var random = function (array) {
+var getRandomElementFromArray = function (array) {
   return array[Math.floor(Math.random() * array.length)];
 };
 
-var wizardList = function () {
+var generateWizardList = function () {
   var wizards = [];
 
-  for (var i = 0; i < 4; i++) {
+  for (var i = 0; i < NUMBER_WIZARDS; i++) {
     wizards[i] = {
-      name: random(firstName) + ' ' + random(lastName),
-      coatColor: random(coatColor),
-      eyesColor: random(eyesColor)
+      name: getRandomElementFromArray(FIRST_NAMES) + ' ' + getRandomElementFromArray(LAST_NAMES),
+      coatColor: getRandomElementFromArray(COAT_COLORS),
+      eyesColor: getRandomElementFromArray(EYES_COLORS)
     };
   }
 
@@ -49,4 +52,11 @@ var renderWizardsList = function (wizards) {
   similarListElement.appendChild(fragment);
 };
 
-renderWizardsList(wizardList());
+var init = function () {
+  var wizards = generateWizardList();
+  renderWizardsList(wizards);
+  getRemoveHidden();
+};
+
+init();
+
