@@ -62,44 +62,44 @@ var init = function () {
   showSetup();
 };
 
-// init(); // Временно выключил
+init();
 
 var setup = document.querySelector('.setup');
 var setupOpen = document.querySelector('.setup-open');
 var setupClose = setup.querySelector('.setup-close');
 var userNameInput = setup.querySelector('.setup-user-name');
 
-var onPopupEscPress = function(evt) {
+var onPopupEscPress = function (evt) {
   if (evt.keyCode === ESC_KEYCODE) {
     closePopup();
   }
 };
 
-var openPopup = function() {
+var openPopup = function () {
   setup.classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
 };
 
-var closePopup = function() {
+var closePopup = function () {
   setup.classList.add('hidden');
   document.removeEventListener('keydown', onPopupEscPress);
 };
 
-setupOpen.addEventListener('click', function() {
+setupOpen.addEventListener('click', function () {
   openPopup();
 });
 
-setupOpen.addEventListener('keydown', function(evt) {
+setupOpen.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     openPopup();
   }
 });
 
-setupClose.addEventListener('click', function() {
+setupClose.addEventListener('click', function () {
   closePopup();
 });
 
-setupClose.addEventListener('keydown', function(evt) {
+setupClose.addEventListener('keydown', function (evt) {
   if (evt.keyCode === ENTER_KEYCODE) {
     closePopup();
   }
@@ -126,13 +126,13 @@ userNameInput.addEventListener('input', function (evt) {
   }
 });
 
-
+// Изменение цвета персонажа
 var coatWizard = document.querySelector('.setup-wizard .wizard-coat');
 var inputCoatWizard = document.querySelector('.setup-wizard-form').querySelector('[name="coat-color"]');
 var eyesWizard = document.querySelector('.setup-wizard .wizard-eyes');
 var inputEyesWizard = document.querySelector('.setup-wizard-form').querySelector('[name="eyes-color"]');
 var fireballWizard = document.querySelector('.setup-fireball-wrap');
-var inputFireballWizard = document.querySelector('.setup-fireball-wrap').querySelector('input');
+var inputFireballWizard = document.querySelector('.setup-fireball-wrap').querySelector('[name="fireball-color"]');
 
 coatWizard.addEventListener('click', function () {
   coatWizard.style.fill = getRandomElementFromArray(COAT_COLORS);
