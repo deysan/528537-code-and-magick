@@ -4,6 +4,7 @@ var FIRST_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'К�
 var LAST_NAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
 var COAT_COLORS = ['rgb(101, 137, 164)', 'rgb(241, 43, 107)', 'rgb(146, 100, 161)', 'rgb(56, 159, 117)', 'rgb(215, 210, 55)', 'rgb(0, 0, 0)'];
 var EYES_COLORS = ['black', 'red', 'blue', 'yellow', 'green'];
+var FIREBALL_COLORS = ['#ee4830', '#30a8ee', '#5ce6c0', '#e848d5', '#e6e848'];
 var WIZARDS_NUMBER = 4;
 var ESC_KEYCODE = 27;
 var ENTER_KEYCODE = 13;
@@ -104,7 +105,7 @@ setupClose.addEventListener('keydown', function(evt) {
   }
 });
 
-userNameInput.addEventListener('invalid', function (evt) {
+userNameInput.addEventListener('invalid', function () {
   if (userNameInput.validity.tooShort) {
     userNameInput.setCustomValidity('Имя персонажа не может содержать менее 2 символов');
   } else if (userNameInput.validity.tooLong) {
@@ -123,4 +124,27 @@ userNameInput.addEventListener('input', function (evt) {
   } else {
     target.setCustomValidity('');
   }
+});
+
+
+var coatWizard = document.querySelector('.setup-wizard .wizard-coat');
+var inputCoatWizard = document.querySelector('.setup-wizard-form').querySelector('[name="coat-color"]');
+var eyesWizard = document.querySelector('.setup-wizard .wizard-eyes');
+var inputEyesWizard = document.querySelector('.setup-wizard-form').querySelector('[name="eyes-color"]');
+var fireballWizard = document.querySelector('.setup-fireball-wrap');
+var inputFireballWizard = document.querySelector('.setup-fireball-wrap').querySelector('input');
+
+coatWizard.addEventListener('click', function () {
+  coatWizard.style.fill = getRandomElementFromArray(COAT_COLORS);
+  inputCoatWizard.setAttribute('value', coatWizard.style.fill);
+});
+
+eyesWizard.addEventListener('click', function () {
+  eyesWizard.style.fill = getRandomElementFromArray(EYES_COLORS);
+  inputEyesWizard.setAttribute('value', eyesWizard.style.fill);
+});
+
+fireballWizard.addEventListener('click', function () {
+  fireballWizard.style.background = getRandomElementFromArray(FIREBALL_COLORS);
+  inputFireballWizard.setAttribute('value', fireballWizard.style.background);
 });
