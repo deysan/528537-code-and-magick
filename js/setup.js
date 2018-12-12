@@ -25,11 +25,6 @@ var inputEyesWizard = document.querySelector('.setup-wizard-form').querySelector
 var fireballWizard = document.querySelector('.setup-fireball-wrap');
 var inputFireballWizard = fireballWizard.querySelector('input');
 
-var showSetup = function () {
-  userDialog.classList.remove('hidden');
-  userDialog.querySelector('.setup-similar').classList.remove('hidden');
-};
-
 var getRandomElementFromArray = function (array) {
   return array[Math.floor(Math.random() * array.length)];
 };
@@ -69,7 +64,6 @@ var renderWizardsList = function (wizards) {
 var init = function () {
   var wizards = generateWizardList();
   renderWizardsList(wizards);
-  // showSetup();
 };
 
 init();
@@ -85,6 +79,7 @@ var onPopupEscPress = function (evt) {
 
 var openPopup = function () {
   userDialog.classList.remove('hidden');
+  userDialog.querySelector('.setup-similar').classList.remove('hidden');
   document.addEventListener('keydown', onPopupEscPress);
 };
 
