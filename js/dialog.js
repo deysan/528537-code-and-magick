@@ -39,9 +39,9 @@ uploadElement.addEventListener('mousedown', function (evt) {
     document.removeEventListener('mouseup', onMouseUp);
 
     if (dragged) {
-      var onClickPreventDefault = function (evt) {
-        evt.preventDefault();
-        uploadElement.removeEventListener('click', onClickPreventDefault)
+      var onClickPreventDefault = function (removeEvt) {
+        removeEvt.preventDefault();
+        uploadElement.removeEventListener('click', onClickPreventDefault);
       };
       uploadElement.addEventListener('click', onClickPreventDefault);
     }
