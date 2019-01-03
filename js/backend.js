@@ -1,11 +1,8 @@
 'use strict';
 
 (function () {
-
-  var URLLoad = 'https://js.dump.academy/code-and-magick/data';
-  var URLSave = 'https://js.dump.academy/code-and-magick';
-
   window.load = function (onLoad, onError) {
+    var URL = 'https://js.dump.academy/code-and-magick/data';
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -21,17 +18,18 @@
       onError('Произошла ошибка соединения');
     });
 
-    xhr.timeout = 10000;
-
     xhr.addEventListener('timeout', function () {
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.open('GET', URLLoad);
+    xhr.timeout = 10000;
+
+    xhr.open('GET', URL);
     xhr.send();
   };
 
   window.save = function (data, onLoad, onError) {
+    var URL = 'https://js.dump.academy/code-and-magick';
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -53,19 +51,8 @@
 
     xhr.timeout = 1000;
 
-    xhr.open('POST', URLSave);
+    xhr.open('POST', URL);
     xhr.send(data);
-  };
-
-  window.onError = function (errorMessage) {
-    var popup = document.createElement('div');
-    popup.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
-    popup.style.position = 'absolute';
-    popup.style.left = 0;
-    popup.style.right = 0;
-    popup.style.fontSize = '30px';
-    popup.textContent = errorMessage;
-    document.body.insertAdjacentElement('afterbegin', popup);
   };
 })();
 

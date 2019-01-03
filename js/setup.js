@@ -48,7 +48,7 @@
   //   similarListElement.appendChild(fragment);
   // };
 
-  window.load(function (wizards) {
+  var renderWizardsList = function (wizards) {
     var fragment = document.createDocumentFragment();
 
     for (var i = 0; i < WIZARDS_NUMBER; i++) {
@@ -57,7 +57,29 @@
 
     similarListElement.appendChild(fragment);
     userDialogElement.querySelector('.setup-similar').classList.remove('hidden');
+  };
+
+  var onError = function (errorMessage) {
+    var popup = document.createElement('div');
+    popup.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+    popup.style.position = 'absolute';
+    popup.style.left = 0;
+    popup.style.right = 0;
+    popup.style.fontSize = '30px';
+    popup.textContent = errorMessage;
+    document.body.insertAdjacentElement('afterbegin', popup);
+  };
+
+  var formElement = userDialogElement.querySelector('.setup-wizard-form');
+
+  formElement.addEventListener('submit', function (evt) {
+    window.save(new FormData(formElement), function () {
+      userDialogElement.classList.add('hidden');
+    });
+    evt.preventDefault();
   });
+
+  window.load(renderWizardsList, onError);
 
   // var init = function () {
   //   var wizards = generateWizardList();
