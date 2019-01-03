@@ -1,6 +1,7 @@
 'use strict';
 
 (function () {
+  // Загружка данных
   window.load = function (onLoad, onError) {
     var URL = 'https://js.dump.academy/code-and-magick/data';
     var xhr = new XMLHttpRequest();
@@ -28,6 +29,7 @@
     xhr.send();
   };
 
+  // Отправка данных
   window.save = function (data, onLoad, onError) {
     var URL = 'https://js.dump.academy/code-and-magick';
     var xhr = new XMLHttpRequest();
@@ -55,4 +57,3 @@
     xhr.send(data);
   };
 })();
-

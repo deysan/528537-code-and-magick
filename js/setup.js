@@ -1,9 +1,6 @@
 'use strict';
 
 (function () {
-
-  // var FIRST_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
-  // var LAST_NAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
   var WIZARDS_NUMBER = 4;
 
   var userDialogElement = document.querySelector('.setup');
@@ -15,21 +12,9 @@
   var userDialogOpenElement = document.querySelector('.setup-open');
   var userDialogCloseElement = userDialogElement.querySelector('.setup-close');
   var userNameInputElement = userDialogElement.querySelector('.setup-user-name');
+  var formElement = userDialogElement.querySelector('.setup-wizard-form');
 
-  // var generateWizardList = function () {
-  //   var wizards = [];
-
-  //   for (var i = 0; i < WIZARDS_NUMBER; i++) {
-  //     wizards[i] = {
-  //       name: window.util.getRandomElementFromArray(FIRST_NAMES) + ' ' + window.util.getRandomElementFromArray(LAST_NAMES),
-  //       coatColor: window.util.getRandomElementFromArray(window.colorize.COAT_COLORS),
-  //       eyesColor: window.util.getRandomElementFromArray(window.colorize.EYES_COLORS)
-  //     };
-  //   }
-
-  //   return wizards;
-  // };
-
+  // Параметры волшебников
   var renderWizard = function (wizard) {
     var wizardElement = similarWizardTemplate.cloneNode(true);
 
@@ -39,14 +24,6 @@
 
     return wizardElement;
   };
-
-  // var renderWizardsList = function (wizards) {
-  //   var fragment = document.createDocumentFragment();
-  //   for (var i = 0; i < WIZARDS_NUMBER; i++) {
-  //     fragment.appendChild(renderWizard(wizards[i]));
-  //   }
-  //   similarListElement.appendChild(fragment);
-  // };
 
   var renderWizardsList = function (wizards) {
     var fragment = document.createDocumentFragment();
@@ -59,6 +36,7 @@
     userDialogElement.querySelector('.setup-similar').classList.remove('hidden');
   };
 
+  // Обработчик ошибок
   var onError = function (errorMessage) {
     var popup = document.createElement('div');
     popup.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
@@ -70,8 +48,7 @@
     document.body.insertAdjacentElement('afterbegin', popup);
   };
 
-  var formElement = userDialogElement.querySelector('.setup-wizard-form');
-
+  // Обработчик отправки формы
   formElement.addEventListener('submit', function (evt) {
     window.save(new FormData(formElement), function () {
       userDialogElement.classList.add('hidden');
@@ -79,14 +56,8 @@
     evt.preventDefault();
   });
 
+  // Загрузка данных с сервера
   window.load(renderWizardsList, onError);
-
-  // var init = function () {
-  //   var wizards = generateWizardList();
-  //   renderWizardsList(wizards);
-  // };
-
-  // init();
 
   // Настройки персонажа
   var onPopupEscPress = function (evt) {
