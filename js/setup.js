@@ -45,7 +45,7 @@
   });
 
   // Загрузка данных с сервера
-  window.backend.load(renderWizardsList, window.backend.onError);
+  window.backend.load(renderWizardsList, window.backend.error);
 
   // Настройки персонажа
   var onPopupEscPress = function (evt) {

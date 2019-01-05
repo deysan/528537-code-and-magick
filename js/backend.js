@@ -8,7 +8,7 @@
   };
 
   // Обработчик ошибок
-  var onError = function (errorMessage) {
+  var error = function (errorMessage) {
     var popup = document.createElement('div');
     popup.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
     popup.style.position = 'absolute';
@@ -59,7 +59,7 @@
   window.backend = {
     load: load,
     save: save,
-    onError: onError
+    error: error
   };
 
 })();
