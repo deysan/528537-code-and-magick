@@ -36,28 +36,16 @@
     userDialogElement.querySelector('.setup-similar').classList.remove('hidden');
   };
 
-  // Обработчик ошибок
-  var onError = function (errorMessage) {
-    var popup = document.createElement('div');
-    popup.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
-    popup.style.position = 'absolute';
-    popup.style.left = 0;
-    popup.style.right = 0;
-    popup.style.fontSize = '30px';
-    popup.textContent = errorMessage;
-    document.body.insertAdjacentElement('afterbegin', popup);
-  };
-
   // Обработчик отправки формы
   formElement.addEventListener('submit', function (evt) {
-    window.save(new FormData(formElement), function () {
+    window.backend.save(new FormData(formElement), function () {
       userDialogElement.classList.add('hidden');
     });
     evt.preventDefault();
   });
 
   // Загрузка данных с сервера
-  window.load(renderWizardsList, onError);
+  window.backend.load(renderWizardsList, window.backend.onError);
 
   // Настройки персонажа
   var onPopupEscPress = function (evt) {
