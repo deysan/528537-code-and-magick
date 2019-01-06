@@ -19,7 +19,7 @@
     document.body.insertAdjacentElement('afterbegin', popup);
   };
 
-  var prepareRequest = function (onLoad, onError) {
+  var prepareRequest = function (onLoad, error) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -27,33 +27,33 @@
       if (xhr.status === 200) {
         onLoad(xhr.response);
       } else {
-        onError('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
+        error('Статус ответа: ' + xhr.status + ' ' + xhr.statusText);
       }
     });
 
     xhr.addEventListener('error', function () {
-      onError('Произошла ошибка соединения');
+      error('Произошла ошибка соединения');
     });
 
     xhr.timeout = 10000;
 
     xhr.addEventListener('timeout', function () {
-      onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
+      error('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
     return xhr;
   };
 
   // Загружка данных
-  var load = function (onLoad, onError) {
-    var xhr = prepareRequest(onLoad, onError);
+  var load = function (onLoad, error) {
+    var xhr = prepareRequest(onLoad, error);
     xhr.open('GET', URL.load);
     xhr.send();
   };
 
   // Отправка данных
-  var save = function (data, onLoad, onError) {
-    var xhr = prepareRequest(onLoad, onError);
+  var save = function (data, onLoad, error) {
+    var xhr = prepareRequest(onLoad, error);
     xhr.open('POST', URL.save);
     xhr.send(data);
   };
