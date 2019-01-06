@@ -1,9 +1,6 @@
 'use strict';
 
 (function () {
-
-  var FIRST_NAMES = ['Иван', 'Хуан Себастьян', 'Мария', 'Кристоф', 'Виктор', 'Юлия', 'Люпита', 'Вашингтон'];
-  var LAST_NAMES = ['да Марья', 'Верон', 'Мирабелла', 'Вальц', 'Онопко', 'Топольницкая', 'Нионго', 'Ирвинг'];
   var WIZARDS_NUMBER = 4;
 
   var userDialogElement = document.querySelector('.setup');
@@ -15,45 +12,40 @@
   var userDialogOpenElement = document.querySelector('.setup-open');
   var userDialogCloseElement = userDialogElement.querySelector('.setup-close');
   var userNameInputElement = userDialogElement.querySelector('.setup-user-name');
+  var formElement = userDialogElement.querySelector('.setup-wizard-form');
 
-  var generateWizardList = function () {
-    var wizards = [];
-
-    for (var i = 0; i < WIZARDS_NUMBER; i++) {
-      wizards[i] = {
-        name: window.util.getRandomElementFromArray(FIRST_NAMES) + ' ' + window.util.getRandomElementFromArray(LAST_NAMES),
-        coatColor: window.util.getRandomElementFromArray(window.colorize.COAT_COLORS),
-        eyesColor: window.util.getRandomElementFromArray(window.colorize.EYES_COLORS)
-      };
-    }
-
-    return wizards;
-  };
-
+  // Параметры волшебников
   var renderWizard = function (wizard) {
     var wizardElement = similarWizardTemplate.cloneNode(true);
 
     wizardElement.querySelector('.setup-similar-label').textContent = wizard.name;
-    wizardElement.querySelector('.wizard-coat').style.fill = wizard.coatColor;
-    wizardElement.querySelector('.wizard-eyes').style.fill = wizard.eyesColor;
+    wizardElement.querySelector('.wizard-coat').style.fill = wizard.colorCoat;
+    wizardElement.querySelector('.wizard-eyes').style.fill = wizard.colorEyes;
 
     return wizardElement;
   };
 
   var renderWizardsList = function (wizards) {
     var fragment = document.createDocumentFragment();
-    for (var i = 0; i < wizards.length; i++) {
+
+    for (var i = 0; i < WIZARDS_NUMBER; i++) {
       fragment.appendChild(renderWizard(wizards[i]));
     }
+
     similarListElement.appendChild(fragment);
+    userDialogElement.querySelector('.setup-similar').classList.remove('hidden');
   };
 
-  var init = function () {
-    var wizards = generateWizardList();
-    renderWizardsList(wizards);
-  };
+  // Обработчик отправки формы
+  formElement.addEventListener('submit', function (evt) {
+    window.backend.save(new FormData(formElement), function () {
+      userDialogElement.classList.add('hidden');
+    }, window.backend.onError);
+    evt.preventDefault();
+  });
 
-  init();
+  // Загрузка данных с сервера
+  window.backend.load(renderWizardsList, window.backend.onError);
 
   // Настройки персонажа
   var onPopupEscPress = function (evt) {
