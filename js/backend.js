@@ -8,7 +8,7 @@
   };
 
   // Обработчик ошибок
-  var error = function (errorMessage) {
+  var onError = function (errorMessage) {
     var popup = document.createElement('div');
     popup.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
     popup.style.position = 'absolute';
@@ -19,7 +19,7 @@
     document.body.insertAdjacentElement('afterbegin', popup);
   };
 
-  var server = function (onLoad, onError) {
+  var prepareRequest = function (onLoad, onError) {
     var xhr = new XMLHttpRequest();
     xhr.responseType = 'json';
 
@@ -35,23 +35,25 @@
       onError('Произошла ошибка соединения');
     });
 
+    xhr.timeout = 10000;
+
     xhr.addEventListener('timeout', function () {
       onError('Запрос не успел выполниться за ' + xhr.timeout + 'мс');
     });
 
-    xhr.timeout = 10000;
+    return xhr;
   };
 
   // Загружка данных
   var load = function (onLoad, onError) {
-    var xhr = server(onLoad, onError);
+    var xhr = prepareRequest(onLoad, onError);
     xhr.open('GET', URL.load);
     xhr.send();
   };
 
   // Отправка данных
   var save = function (data, onLoad, onError) {
-    var xhr = server(onLoad, onError);
+    var xhr = prepareRequest(onLoad, onError);
     xhr.open('POST', URL.save);
     xhr.send(data);
   };
@@ -59,7 +61,7 @@
   window.backend = {
     load: load,
     save: save,
-    error: error
+    error: onError
   };
 
 })();
