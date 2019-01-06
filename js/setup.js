@@ -40,7 +40,7 @@
   formElement.addEventListener('submit', function (evt) {
     window.backend.save(new FormData(formElement), function () {
       userDialogElement.classList.add('hidden');
-    });
+    }, window.backend.error);
     evt.preventDefault();
   });
 
