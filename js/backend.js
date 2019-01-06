@@ -61,7 +61,7 @@
   window.backend = {
     load: load,
     save: save,
-    error: onError
+    onError: onError
   };
 
 })();

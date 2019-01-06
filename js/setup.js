@@ -40,12 +40,12 @@
   formElement.addEventListener('submit', function (evt) {
     window.backend.save(new FormData(formElement), function () {
       userDialogElement.classList.add('hidden');
-    }, window.backend.error);
+    }, window.backend.onError);
     evt.preventDefault();
   });
 
   // Загрузка данных с сервера
-  window.backend.load(renderWizardsList, window.backend.error);
+  window.backend.load(renderWizardsList, window.backend.onError);
 
   // Настройки персонажа
   var onPopupEscPress = function (evt) {
