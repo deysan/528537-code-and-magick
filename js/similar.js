@@ -16,7 +16,7 @@
     }
 
     return rank;
-  }
+  };
 
   var updateWizards = function () {
     window.render(wizards.slice().sort(function (left, right) {
@@ -26,7 +26,7 @@
       }
       return rankDiff;
     }));
-  }
+  };
 
   window.colorize.onEyesChange = function (color) {
     eyesColor = color;
