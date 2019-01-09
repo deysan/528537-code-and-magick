@@ -25,17 +25,6 @@
     return wizardElement;
   };
 
-  var renderWizardsList = function (wizards) {
-    var fragment = document.createDocumentFragment();
-
-    for (var i = 0; i < WIZARDS_NUMBER; i++) {
-      fragment.appendChild(renderWizard(wizards[i]));
-    }
-
-    similarListElement.appendChild(fragment);
-    userDialogElement.querySelector('.setup-similar').classList.remove('hidden');
-  };
-
   // Обработчик отправки формы
   formElement.addEventListener('submit', function (evt) {
     window.backend.save(new FormData(formElement), function () {
@@ -43,9 +32,6 @@
     }, window.backend.onError);
     evt.preventDefault();
   });
-
-  // Загрузка данных с сервера
-  window.backend.load(renderWizardsList, window.backend.onError);
 
   // Настройки персонажа
   var onPopupEscPress = function (evt) {
@@ -107,5 +93,17 @@
       target.setCustomValidity('');
     }
   });
+
+  window.render = function (wizards) {
+    var fragment = document.createDocumentFragment();
+    similarListElement.innerHTML = '';
+
+    for (var i = 0; i < WIZARDS_NUMBER; i++) {
+      fragment.appendChild(renderWizard(wizards[i]));
+    }
+
+    similarListElement.appendChild(fragment);
+    userDialogElement.querySelector('.setup-similar').classList.remove('hidden');
+  };
 
 })();

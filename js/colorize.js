@@ -17,12 +17,14 @@
     var color = window.util.getRandomElementFromArray(COAT_COLORS);
     coatWizardElement.style.fill = color;
     inputCoatWizardElement.setAttribute('value', color);
+    window.similar.onCoatChange(color);
   });
 
   eyesWizardElement.addEventListener('click', function () {
     var color = window.util.getRandomElementFromArray(EYES_COLORS);
     eyesWizardElement.style.fill = color;
     inputEyesWizardElement.setAttribute('value', color);
+    window.similar.onEyesChange(color);
   });
 
   fireballWizardElement.addEventListener('click', function () {
@@ -30,11 +32,5 @@
     fireballWizardElement.style.background = color;
     inputFireballWizardElement.setAttribute('value', color);
   });
-
-  window.colorize = {
-    COAT_COLORS: COAT_COLORS,
-    EYES_COLORS: EYES_COLORS,
-    FIREBALL_COLORS: FIREBALL_COLORS
-  };
 
 })();
