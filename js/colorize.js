@@ -13,16 +13,27 @@
   var fireballWizardElement = document.querySelector('.setup-fireball-wrap');
   var inputFireballWizardElement = fireballWizardElement.querySelector('input');
 
+  var colorize = {
+    onEyesChange: function (color) {
+      return color;
+    },
+    onCoatChange: function (color) {
+      return color;
+    }
+  };
+
   coatWizardElement.addEventListener('click', function () {
     var color = window.util.getRandomElementFromArray(COAT_COLORS);
     coatWizardElement.style.fill = color;
     inputCoatWizardElement.setAttribute('value', color);
+    colorize.onCoatChange(color);
   });
 
   eyesWizardElement.addEventListener('click', function () {
     var color = window.util.getRandomElementFromArray(EYES_COLORS);
     eyesWizardElement.style.fill = color;
     inputEyesWizardElement.setAttribute('value', color);
+    colorize.onEyesChange(color);
   });
 
   fireballWizardElement.addEventListener('click', function () {
@@ -31,10 +42,6 @@
     inputFireballWizardElement.setAttribute('value', color);
   });
 
-  window.colorize = {
-    COAT_COLORS: COAT_COLORS,
-    EYES_COLORS: EYES_COLORS,
-    FIREBALL_COLORS: FIREBALL_COLORS
-  };
+  window.colorize = colorize;
 
 })();
